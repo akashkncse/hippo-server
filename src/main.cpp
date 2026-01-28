@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 #include <arpa/inet.h>
 
 int main()
@@ -37,4 +38,16 @@ int main()
 		std::cout << buffer << std::endl;
 		std::cout << "--------END---------" << std::endl;
 	}
+
+	std::string response =
+		"HTTP/1.1 200 OK\r\n"
+		"Content-Type: text/html\r\n"
+		"Content-Length: 18\r\n"
+		"Connection: close\r\n"
+		"\r\n"
+		"Fastest C++ Server";
+
+	send(client_fd, response.c_str(), response.size(), 0);
+	close(server_fd);
+	close(client_fd);
 }
