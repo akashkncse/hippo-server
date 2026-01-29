@@ -30,14 +30,35 @@ int main()
 	int client_fd = accept(server_fd, nullptr, nullptr);
 
 	char buffer[2048] = {0};
-	int bytesRead = recv(client_fd, buffer, sizeof(buffer), 0);
-
-	if (bytesRead > 0)
+	std::string data;
+	std::string headers;
+	// int bytesRead = recv(client_fd, buffer, sizeof(buffer), 0);
+	int bytesRead = 0;
+	while (bytesRead = recv(client_fd, buffer, sizeof(buffer), 0))
 	{
-		std::cout << "--------RAW---------" << std::endl;
-		std::cout << buffer << std::endl;
-		std::cout << "--------END---------" << std::endl;
+		for (int i = 0; i < bytesRead; i++)
+		{
+			data += buffer[i];
+		}
+		int pos;
+		if (data.find("\r\n\r\n") != std::string::npos)
+		{
+			pos = data.find("\r\n\r\n");
+			headers += data.substr(0, pos);
+			break;
+		}
 	}
+
+	std::cout << "Successful retrieval of headers!" << std::endl;
+	std::cout << "----------RAW-----------" << std::endl;
+	std::cout << headers << std::endl;
+
+	// if (bytesRead > 0)
+	// {
+	// 	std::cout << "--------RAW---------" << std::endl;
+	// 	std::cout << buffer << std::endl;
+	// 	std::cout << "--------END---------" << std::endl;
+	// }
 
 	std::string response =
 		"HTTP/1.1 200 OK\r\n"
