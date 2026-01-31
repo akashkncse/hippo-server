@@ -4,6 +4,10 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
+struct HTTPRequest
+{
+};
+
 int main()
 {
 	// Server Socket Creation
