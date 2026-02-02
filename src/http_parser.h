@@ -23,6 +23,10 @@ class HttpParser
 public:
     enum State
     {
-        HTTP_REQUEST_LINE = 0, HTTP_HEADERS, HTTP_COMPLETE;
-    }
+        HTTP_REQUEST_LINE,
+        HTTP_HEADERS,
+        HTTP_COMPLETE
+    };
+
+    void feed(HttpRequest &req) {}
 };

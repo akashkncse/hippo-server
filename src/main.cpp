@@ -3,6 +3,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include "http_parser.h"
 
 struct HTTPRequest
 {
@@ -33,29 +34,13 @@ int main()
 
 	int client_fd = accept(server_fd, nullptr, nullptr);
 
-	char buffer[2048] = {0};
-	std::string data;
-	std::string headers;
-	// int bytesRead = recv(client_fd, buffer, sizeof(buffer), 0);
-	int bytesRead = 0;
-	while (bytesRead = recv(client_fd, buffer, sizeof(buffer), 0))
+	HttpRequest req;
+	HttpParser parse;
+	int br = 0;
+	char buf[2048];
+	while (br = recv(client_fd, buf, sizeof(buf), 0))
 	{
-		for (int i = 0; i < bytesRead; i++)
-		{
-			data += buffer[i];
-		}
-		int pos;
-		if (data.find("\r\n\r\n") != std::string::npos)
-		{
-			pos = data.find("\r\n\r\n");
-			headers += data.substr(0, pos);
-			break;
-		}
 	}
-
-	std::cout << "Successful retrieval of headers!" << std::endl;
-	std::cout << "----------RAW-----------" << std::endl;
-	std::cout << headers << std::endl;
 
 	// if (bytesRead > 0)
 	// {
