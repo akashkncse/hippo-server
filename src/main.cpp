@@ -40,8 +40,11 @@ int main()
 	char buf[2048];
 	while (br = recv(client_fd, buf, sizeof(buf), 0))
 	{
+		parse.feed(req, buf, br);
+		if (parse.status == HTTP_COMPLETE)
+			break;
 	}
-
+	std::cout << req.method;
 	// if (bytesRead > 0)
 	// {
 	// 	std::cout << "--------RAW---------" << std::endl;

@@ -1,7 +1,7 @@
 #include "http_parser.h"
 
 void HttpParser::feed(HttpRequest &req, const char *b, size_t len)
-{   
+{
     temp.append(b, len);
     for (;;)
     {
@@ -24,6 +24,7 @@ void HttpParser::feed(HttpRequest &req, const char *b, size_t len)
             if (pos == 0)
             {
                 status = HTTP_COMPLETE;
+                break;
             }
             std::string line = temp.substr(0, pos);
             std::stringstream liness(line);

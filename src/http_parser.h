@@ -29,7 +29,7 @@ enum State
 class HttpParser
 {
 public:
-    State status;
+    State status = HTTP_REQUEST_LINE;
     std::string temp;
     void feed(HttpRequest &, const char *, size_t);
 };
