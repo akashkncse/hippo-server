@@ -1,3 +1,5 @@
+#include <asm-generic/socket.h>
+#include <cstdlib>
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -20,6 +22,12 @@ int main()
 	info.sin_family = AF_INET;
 	inet_pton(AF_INET, "127.0.0.1", &info.sin_addr);
 
+	int opt = 1;
+	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+	{
+	    perror("setsockopt failed");
+		exit(EXIT_FAILURE);
+	}
 	if (bind(server_fd, (sockaddr *)&info, sizeof(info)))
 	{
 		perror("bind() failed");
@@ -44,7 +52,7 @@ int main()
 		if (parse.status == HTTP_COMPLETE)
 			break;
 	}
-	std::cout << req.method;
+	std::cout << req;
 	// if (bytesRead > 0)
 	// {
 	// 	std::cout << "--------RAW---------" << std::endl;

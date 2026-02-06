@@ -1,4 +1,5 @@
 #pragma once
+#include <ostream>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -33,3 +34,5 @@ public:
     std::string temp;
     void feed(HttpRequest &, const char *, size_t);
 };
+
+std::ostream& operator<<(std::ostream&, HttpRequest&);
