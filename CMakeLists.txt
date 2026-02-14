@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(hippo_server
     src/main.cpp
     src/http_parser.cpp
+    src/static_server.cpp
 )
 
 target_include_directories(hippo_server PUBLIC src)

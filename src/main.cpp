@@ -7,10 +7,6 @@
 #include <arpa/inet.h>
 #include "http_parser.h"
 
-struct HTTPRequest
-{
-};
-
 int main()
 {
 	// Server Socket Creation
@@ -25,7 +21,7 @@ int main()
 	int opt = 1;
 	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
 	{
-	    perror("setsockopt failed");
+		perror("setsockopt failed");
 		exit(EXIT_FAILURE);
 	}
 	if (bind(server_fd, (sockaddr *)&info, sizeof(info)))
@@ -59,6 +55,8 @@ int main()
 	// 	std::cout << buffer << std::endl;
 	// 	std::cout << "--------END---------" << std::endl;
 	// }
+
+																																	
 
 	std::string response =
 		"HTTP/1.1 200 OK\r\n"
