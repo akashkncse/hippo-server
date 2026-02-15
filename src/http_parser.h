@@ -35,4 +35,4 @@ public:
     void feed(HttpRequest &, const char *, size_t);
 };
 
-std::ostream& operator<<(std::ostream&, HttpRequest&);
+std::ostream &operator<<(std::ostream &, HttpRequest &);

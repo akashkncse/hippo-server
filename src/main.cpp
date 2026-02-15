@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include "http_parser.h"
+std::string static_server(std::string path);
 
 int main()
 {
@@ -55,16 +56,16 @@ int main()
 	// 	std::cout << buffer << std::endl;
 	// 	std::cout << "--------END---------" << std::endl;
 	// }
-
-																																	
-
+	std::string rescontent = static_server(req.path);
 	std::string response =
 		"HTTP/1.1 200 OK\r\n"
 		"Content-Type: text/html\r\n"
-		"Content-Length: 18\r\n"
-		"Connection: close\r\n"
+		"Content-Length: " +
+		std::to_string(rescontent.size()) +
 		"\r\n"
-		"Fastest C++ Server";
+		"Connection: close\r\n"
+		"\r\n" +
+		rescontent;
 
 	send(client_fd, response.c_str(), response.size(), 0);
 	close(server_fd);
